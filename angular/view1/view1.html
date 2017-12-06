@@ -1,0 +1,55 @@
+<span ng-hide="cs411Auth">
+    <form>
+    <input type="text" ng-model="username" placeholder="samf95" value="samf95">samf95<br/>
+<input type="text" ng-model="BUID" placeholder="U18963463" value=U18963463">U18963463<br/>
+<button ng-click="doLogin()">Login</button><br/>
+</form>
+    </span>
+
+<div ng-show="cs411Auth" class="well col-md-8">
+    <label>Peer evaluation for Group {{groupNumber}}</label>
+    <form name="reviewForm" ng-submit="submitForm()">
+        <table>
+            <tr>
+                <th width="200">Member</th>
+                <th width="100">Preparation</th>
+                <th width="100">Participation</th>
+                <th width="100">Effort</th>
+                <th width="100">Communication</th>
+                <th width="100">Contribution</th>
+                <th width="100">Overall</th>
+            </tr>
+
+            <tr ng-repeat="member in members">
+                <td width="200">{{member.firstName}} {{member.lastName}}</td>
+                <td width="130"><input ng-model="member.scores[0]" required type="number" min="0" max="5" step="1"
+                                       value="0"></td>
+                <td width="130"><input ng-model="member.scores[1]" required type="number" min="0" max="5" step="1"
+                                       value="0"></td>
+                <td width="130"><input ng-model="member.scores[2]" required type="number" min="0" max="5" step="1"
+                                       value="0"></td>
+                <td width="130"><input ng-model="member.scores[3]" required type="number" min="0" max="5" step="1"
+                                       value="0"></td>
+                <td width="130"><input ng-model="member.scores[4]" required type="number" min="0" max="5" step="1"
+                                       value="0"></td>
+                <td width="130"><input ng-model="member.scores[5]" required type="number" min="0" max="5" step="1"
+                                       value="0"></td>
+            </tr>
+
+        </table>
+        <br/>
+        <label>What was a difficulty that your team faced, and how was it solved?</label>
+        <br/>
+        <textarea rows="6" cols="100" ng-model="difficulty"></textarea>
+        <p/>
+        <label>What would you do differently if you were to start a new project now?</label>
+        <br/>
+        <textarea rows="6" cols="100" ng-model="different"></textarea>
+        <p/>
+        <label>Overall, do you feel that your project was a success?</label>
+        <br/>
+        <textarea rows="6" cols="100" ng-model="success"></textarea>
+<br/>
+        <input type="submit" value="Submit">
+    </form>
+</div>
