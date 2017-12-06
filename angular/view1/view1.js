@@ -28,7 +28,8 @@ angular.module('myApp.view1', ['ngRoute', 'ngCookies'])
 
             const request = {
                 method: 'post',
-                url: 'http://localhost:3000/form',
+//                url: 'http://localhost:3000/form',
+                url: '/form',
                 data: {
                     username: $scope.username,
                     BUID: $scope.BUID
@@ -69,7 +70,8 @@ angular.module('myApp.view1', ['ngRoute', 'ngCookies'])
             reviewForm.members = $scope.members
             const request = {
                 method: 'post',
-                url: 'http://localhost:3000/form/submit',
+//                url: 'http://localhost:3000/form/submit',
+                url: '/form/submit',
                 data: reviewForm
             }
             $http(request)
