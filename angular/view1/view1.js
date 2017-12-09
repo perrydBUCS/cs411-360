@@ -3,26 +3,18 @@
 angular.module('myApp.view1', ['ngRoute', 'ngCookies'])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/view1', {
+        $routeProvider
+            .when('/view1', {
             templateUrl: 'view1/view1.html',
             controller: 'View1Ctrl'
         })
+            .when('/view2', {
+            templateUrl: 'view2/view2.html',
+            controller: 'View1Ctrl' //was View2Ctrl
+        });
     }])
 
-    .controller('View1Ctrl', ['$scope', '$http', '$cookies', function ($scope, $http, $cookies) {
-
-        /*
-                $scope.fields = {}
-                $scope.tab1 = 'TABLE HERE';
-
-                $scope.loadForm = function () {
-                    $http.get('http://localhost:3000/form')
-                        .then(function (response) {
-                            $scope.members = response.data
-                            console.log(response.data)
-                        })
-                }
-        */
+    .controller('view1Ctrl', ['$location', '$scope', '$http', '$cookies', function ($location, $scope, $http, $cookies) {
 
         $scope.doLogin = function () {
 
@@ -45,6 +37,7 @@ angular.module('myApp.view1', ['ngRoute', 'ngCookies'])
                         $scope.members = response.data.group
                         $scope.groupNumber = response.data.groupNumber
                         $scope.cs411Auth = $cookies.get('cs411Auth')
+                        $location.path('/view1')
 
                     },
                     function (error) {
@@ -57,6 +50,20 @@ angular.module('myApp.view1', ['ngRoute', 'ngCookies'])
                     }
                 )
         }
+        /*
+                $scope.fields = {}
+                $scope.tab1 = 'TABLE HERE';
+
+                $scope.loadForm = function () {
+                    $http.get('http://localhost:3000/form')
+                        .then(function (response) {
+                            $scope.members = response.data
+                            console.log(response.data)
+                        })
+                }
+        */
+
+
         $scope.submitForm = function () {
             let reviewForm = {}
             reviewForm.submitter = {}

@@ -1,5 +1,20 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+
+<div class="container" >
+
+  <form class="form-signin">
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <label for="username" class="sr-only">BU Login</label>
+    <input ng-model="username" type="text" id="username" class="form-control" placeholder="BU Login (i.e. perryd)" required autofocus>
+    <label for="BUID" class="sr-only">Password</label>
+    <input ng-model="BUID" type="text" id="BUID" class="form-control" placeholder="BU ID (i.e. U80172351)" required>
+    <button class="btn btn-lg btn-primary btn-block"  ng-click="doLogin()">Sign in</button>
+    {{validationMessage}}
+  </form>
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
