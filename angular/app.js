@@ -13,6 +13,9 @@ angular.module('cs411', ['ngRoute', 'ngCookies'])
                 templateUrl: 'view2/view2.html',
                 controller: 'view2Ctrl'
             })
+            .when('/view3', {
+                templateUrl: 'view3/view3.html'
+            })
     }])
 
     .controller('view1Ctrl', ['$window', '$location', '$scope', '$http', '$cookies', function ($window, $location, $scope, $http, $cookies) {
@@ -55,10 +58,20 @@ angular.module('cs411', ['ngRoute', 'ngCookies'])
             $http(request)
                 .then(function (response) {
                         console.log(response.data)
+                        $location.url('/view3')
+
 
                     },
                     function (error) {
-                        console.log(error)
+                        if (error.status === 401) {
+                            $scope.authorized = false
+                            $scope.statusMessage = 'There was a problem saving your form.'
+//                            console.log(error)
+  //                          console.log(error.data)
+                            $location.url('/view1')
+                        } else {
+                            console.log(error.data)
+                        }
                     }
                 )
 

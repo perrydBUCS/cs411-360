@@ -61,10 +61,10 @@ studentSchema.methods.checkPassword = function (password) {
     return testHash === this.passwordHash
 }
 
-//This method finds other students in the same group
+//This method finds other students in the same group and section
 //
 studentSchema.methods.findOthersInGroup = function (cb) {
-    return Students.find({groupNumber: this.groupNumber}, {passwordSalt: 0, passwordHash: 0}, cb)
+    return Students.find({groupNumber: this.groupNumber, section: this.section}, {passwordSalt: 0, passwordHash: 0}, cb)
 }
 //The mongo collection will be users in the cs411-360 database...Mongoose adds an 's'
 //to the end of the model name automatically unless the collection ends in a digit
