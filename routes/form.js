@@ -19,6 +19,8 @@ router.route('/')
 
     })
     .post(function (req, res, next) {
+        //This is the login route
+        //
         console.log('looking for', req.body.username)
         Students.findOne({username: req.body.username}, function (err, student) {
             //todo Handle err
@@ -29,13 +31,19 @@ router.route('/')
             }
             else {
                 console.log('Password matches:', student.checkPassword(req.body.BUID))
+
+                //Get the other members of the group
+                //
                 student.findOthersInGroup(function (err, others) {
                     let groupData = {}
                     groupData.currentStudent = student.username
                     groupData.groupNumber = student.groupNumber
                     groupData.group = others
+
+                    //todo This should be a JWT
                     res.cookie('cs411Auth', true)
 //                console.log(others)
+
                     res.json(groupData)
                 })
             }
@@ -46,6 +54,8 @@ router.route('/submit')
     .post(function (req, res, next) {
         const submitter = req.body.submitter
         const members = req.body.members
+
+        //todo If the user has already submitted, throw an error
 
         //Grab essay comments and push them to array of objects
         //todo This is pretty ugly...any way to build this dynamically?
