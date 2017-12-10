@@ -92,7 +92,9 @@ router.route('/submit')
                         })
                 })
             })
-        //todo Send 'success' message back to client
+        //todo Send 'success' message back to client, undo auth
+        res.cookie('cs411Auth', false)
+
         res.json({status: 'success'})
 
     })

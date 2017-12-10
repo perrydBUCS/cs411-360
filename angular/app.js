@@ -58,6 +58,9 @@ angular.module('cs411', ['ngRoute', 'ngCookies'])
             $http(request)
                 .then(function (response) {
                         console.log(response.data)
+                        //Turn off submissions...de-auth on back end, also
+                        //
+                        $window.sessionStorage.removeItem('cs411Auth')
                         $location.url('/view3')
 
 
@@ -67,7 +70,7 @@ angular.module('cs411', ['ngRoute', 'ngCookies'])
                             $scope.authorized = false
                             $scope.statusMessage = 'There was a problem saving your form.'
 //                            console.log(error)
-  //                          console.log(error.data)
+                            //                          console.log(error.data)
                             $location.url('/view1')
                         } else {
                             console.log(error.data)
@@ -94,7 +97,7 @@ angular.module('cs411', ['ngRoute', 'ngCookies'])
 
             //The username should not have @, and the password should start with 'U'
             //
-            if ((BUID.indexOf('U') != 0)  || (BUID.length != 9)){
+            if ((BUID.indexOf('U') != 0) || (BUID.length != 9)) {
                 $scope.validationMessage = 'Your password should start with a U, followed by your 8-digit ID'
                 $location.url('/view2')
 
