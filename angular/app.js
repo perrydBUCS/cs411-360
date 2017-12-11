@@ -1,8 +1,12 @@
-// Declare app level module which depends on views, and components
+/*
+Top-level module to manage student peer reviews for CS411
+Biggest concern is support for ES6 let/const in Microsoft
+browsers; MDN says that current versions do support them
+ */
 angular.module('cs411', ['ngRoute', 'ngCookies'])
     .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
-        $locationProvider.hashPrefix('!');
-        $routeProvider.otherwise({redirectTo: '/view2'});
+        $locationProvider.hashPrefix('!')
+        $routeProvider.otherwise({redirectTo: '/view2'})
 
         $routeProvider
             .when('/view1', {
@@ -18,14 +22,22 @@ angular.module('cs411', ['ngRoute', 'ngCookies'])
             })
     }])
 
+    //Form controller. The form itself does some rudimentary validation on ranges
+    //and completeness, so we don't do any additional validation here
+    //
     .controller('view1Ctrl', ['$window', '$location', '$scope', '$http', '$cookies', function ($window, $location, $scope, $http, $cookies) {
 
+        //Not thrilled to use sessionStorage as a global here, but there doesn't
+        //seem to be a clean way to share values between controllers. Could
+        //use $rootScope, but I don't think there's any advantage over using the session
+        //
         $scope.members = JSON.parse($window.sessionStorage.getItem('members'))
         $scope.groupNumber = $window.sessionStorage.getItem('groupNumber')
         $scope.cs411Auth = $window.sessionStorage.getItem('cs411Auth')
         $scope.currentStudent = $window.sessionStorage.getItem('currentStudent')
-//Toggle for instructions
 
+        //Simple toggle for instructions div
+        //
         $scope.showInstructions = true
         $scope.instructionsButton = "Hide"
 
@@ -38,6 +50,9 @@ angular.module('cs411', ['ngRoute', 'ngCookies'])
             }
         }
 
+        //submitForm passes form info to the back end for storage...could use
+        //more robust error handling
+        //
         $scope.submitForm = function () {
 
             let reviewForm = {}
@@ -57,33 +72,29 @@ angular.module('cs411', ['ngRoute', 'ngCookies'])
             }
             $http(request)
                 .then(function (response) {
-                        console.log(response.data)
                         //Turn off submissions...de-auth on back end, also
                         //
                         $window.sessionStorage.removeItem('cs411Auth')
                         $location.url('/view3')
-
-
                     },
                     function (error) {
                         if (error.status === 401) {
                             $scope.authorized = false
                             $scope.statusMessage = 'There was a problem saving your form.'
-//                            console.log(error)
-                            //                          console.log(error.data)
                             $location.url('/view1')
                         } else {
                             console.log(error.data)
                         }
                     }
                 )
-
-            console.log($scope.fields)
         }
 
 
     }])
 
+    //Login controller. In this case we do some validation on the username
+    //and password fields.
+    //
     .controller('view2Ctrl', ['$window', '$location', '$scope', '$http', '$cookies', function ($window, $location, $scope, $http, $cookies) {
 
         $scope.doLogin = function () {
@@ -107,7 +118,8 @@ angular.module('cs411', ['ngRoute', 'ngCookies'])
                 $location.url('/view2')
 
             }
-
+            //Validation passes, log the user in
+            //
             else {
                 const request = {
                     method: 'post',
@@ -117,13 +129,11 @@ angular.module('cs411', ['ngRoute', 'ngCookies'])
                         BUID: BUID
                     }
                 }
+                //Again, really hate using the session to store these values, but I suppose
+                //that's what it is there for...
+                //
                 $http(request)
                     .then(function (response) {
-//                        $scope.inputForm.$setPristine()
-//                        $scope.username = $scope.BUID = ''
-                            //var authCookie = $cookies.get('twitterAccessJwt')
-                            //$scope.isAuthorized = authCookie
-                            console.log(response.data)
                             let members = response.data.group
                             let groupNumber = response.data.groupNumber
                             let currentStudent = response.data.currentStudent
@@ -140,8 +150,9 @@ angular.module('cs411', ['ngRoute', 'ngCookies'])
                             if (error.status === 401) {
                                 $scope.authorized = false
                                 $scope.validationMessage = 'Either your username or password was entered incorrectly, please try again'
-                                console.log(error)
-                                console.log(error.data)
+
+                                //Back to the login form if there was a problem
+                                //
                                 $location.url('/view2')
                             }
                         }

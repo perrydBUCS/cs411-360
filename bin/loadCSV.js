@@ -8,7 +8,7 @@ const Students = require('../models/student')
 
 //Pull in data from CSV: Docs at https://mhkeller.github.io/indian-ocean/
 //
-const students = io.readDataSync('../data/a1_groupmembers.csv')
+const students = io.readDataSync('../data/a2_groupmembers.csv')
 
 //For each student, set up a document in mongo
 //
@@ -17,7 +17,7 @@ students.map(student => {
     student.BUID = student['Student Id']
     student.firstName = student['First Name']
     student.lastName = student['Last Name']
-    student.section = 'A1'
+    student.section = student['Section']
     student.groupNumber = student['Group Code']
     student.submittedReview = false
 
