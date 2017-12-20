@@ -11,6 +11,7 @@ const Students = require('../models/student')
 const students = io.readDataSync('../data/a2_groupmembers.csv')
 
 //For each student, set up a document in mongo
+//The data file is generated in Blackboard from the Group tab...Export Groups
 //
 students.map(student => {
     student.username = student['User Name']
@@ -41,4 +42,3 @@ students.map(student => {
 //db.reviews.find({'groupNumber': 5}).count()
 //
 
-//todo: Handle hardcoded section (maybe manually add it to csv prior to import)

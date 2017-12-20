@@ -33,7 +33,8 @@ const studentSchema = new Schema({
     lastName: String,
     section: String,
     groupNumber: Number,
-    scores: [Number],
+    //todo Changed this to array of arrays, test to make sure it works
+    scores: [[Number]],
     comments: [{
         topic: String,
         response: String
