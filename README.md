@@ -1,4 +1,4 @@
-TODO: Update this, it is really just the boilerplate from the framework.
+*TODO*: Update this, it is really just the boilerplate from the framework.
 
 # `angular-seed` — the seed for AngularJS apps
 
