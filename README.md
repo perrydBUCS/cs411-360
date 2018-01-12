@@ -1,5 +1,6 @@
 *TODO* add line 1
 *TODO* add line 2
+*TODO* add line 3
 
 # `angular-seed` — the seed for AngularJS apps
 
