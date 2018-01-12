@@ -1,6 +1,5 @@
-*TODO*: Update this, it is really just the boilerplate from the framework.
-*ALSO*: We need this line for some reason.
-*and this one*
+*TODO* add line 1
+*TODO* add line 2
 
 # `angular-seed` — the seed for AngularJS apps
 
