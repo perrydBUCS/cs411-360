@@ -1,5 +1,6 @@
 *TODO* add line 1
 *TODO* add line 2
+
 # `angular-seed` — the seed for AngularJS apps
 
 This project is an application skeleton for a typical [AngularJS][angularjs] web app. You can use it
