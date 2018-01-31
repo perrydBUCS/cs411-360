@@ -1,4 +1,15 @@
-This is really different...
+*TODO* add line 1
+*TODO* add line 2
+*TODO* add line 3
+*TODO* add line 4
+<<<<<<< HEAD
+*TODO* add line 5
+=======
+*TODO* add line 6 (in dev)
+>>>>>>> dev
+
+Add fourth line
+
 # `angular-seed` — the seed for AngularJS apps
 
 This project is an application skeleton for a typical [AngularJS][angularjs] web app. You can use it
