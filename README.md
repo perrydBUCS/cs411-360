@@ -1,4 +1,4 @@
-- Got rid of a bunch of stuff -
+- Adding of a bunch of stuff -
 
 # `angular-seed` — the seed for AngularJS apps
 
